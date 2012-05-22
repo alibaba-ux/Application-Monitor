@@ -2,7 +2,7 @@
 <html>
 <head>
     <title></title>
-    <script type="text/javascript" src="lib/fdev-min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script type="text/javascript" src="logging.js"></script>
     <script type="text/javascript" src="monitor.js"></script>
     <style type="text/css">
@@ -111,9 +111,13 @@
  * time: 4/8/2012
  */
     jQuery(document).ready(function($) {
-      var mylog=ali.getLogger("logger-monitor-tester");
-      var int;
-      mylog.setEnableLevel(4);
+      var mylog=$.getLogger("logger-monitor-tester");
+      $.setLogLevel(4);  // logger-monitor-tester
+	  $.setLogFilter(/^.*monitor.*$/,function(msg){
+	    //do the action , like send request to the back-end or store the log in some place
+	  });
+	  //$.setLogLevel(-1);
+	  mylog.log("+++log test start+++");
       $(document).keydown(function(e) {
         if (e.ctrlKey && e.altKey && e.keyCode == 76) { //ctrl+alt+l
           mylog.log("log start++=");
